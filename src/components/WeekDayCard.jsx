@@ -36,7 +36,7 @@ const WeekDayCard = ({ data, weatherUnits }) => {
           {weatherUnits.temperature}
         </span>
       </p>
-      <div className="grid grid-flow-col gap-2 place-items-center ml-6 text-4xl md:ml-0">
+      <div className="ml-6 text-4xl md:ml-0">
         {weatherEmojis && <div>{weatherEmojis}</div>}
       </div>
     </div>

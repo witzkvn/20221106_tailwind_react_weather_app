@@ -4,7 +4,7 @@ export const getEmojis = (temperature, precipitation, windspeed) => {
   let weather = "";
 
   if (temperature <= 0) {
-    weather += emojis.cloud;
+    weather += emojis.cold;
   } else if (temperature >= 25) {
     weather += emojis.hot;
   }
