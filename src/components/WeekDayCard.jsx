@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getEmojis } from "../utils/getEmojis";
 
 const WeekDayCard = ({ data, weatherUnits }) => {
-  // console.log(weatherUnits);
-  // console.log(data);
   const [weatherEmojis, setWeatherEmojis] = useState("");
   const [averageTemperature, setAverageTemperature] = useState(0);
 

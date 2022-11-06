@@ -8,6 +8,7 @@ function App() {
   const [error, setError] = useState(false);
   const [weatherData, setWeatherData] = useState([]);
   const [weatherUnits, setWeatherUnits] = useState({});
+  const [geoLoc, setGeoLoc] = useState({ latitude: 0, longitude: 0 });
 
   const fetchWeather = useCallback(async (fetchUrl) => {
     setError(false);
@@ -35,15 +36,32 @@ function App() {
   useEffect(() => {
     setIsLoading(true);
 
-    // TODO get geoloc and dynamic url
-    fetchWeather(
-      "https://api.open-meteo.com/v1/forecast?latitude=48.55&longitude=7.74&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,windspeed_10m_max&timezone=Europe%2FLondon"
-    ).then(() => setIsLoading(false));
-  }, [fetchWeather]);
+    if (!navigator.geolocation) {
+      window.alert(
+        "Votre navigateur ne permet pas la géolocalisation pour utiliser cette application !"
+      );
+    }
 
-  // useEffect(() => {
-  //   console.log(weatherData);
-  // }, [weatherData]);
+    getGeolocalisation();
+
+    fetchWeather(
+      `https://api.open-meteo.com/v1/forecast?latitude=${geoLoc.latitude}&longitude=${geoLoc.longitude}&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,windspeed_10m_max&timezone=Europe%2FLondon`
+    ).then(() => setIsLoading(false));
+  }, [fetchWeather, geoLoc.latitude, geoLoc.longitude]);
+
+  const getGeolocalisation = () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setGeoLoc({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      () => {
+        setError(true);
+      }
+    );
+  };
 
   if (isLoading) {
     return (

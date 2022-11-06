@@ -4,10 +4,7 @@ import { formatDateToHours } from "../utils/formatDateToHours";
 import { getEmojis } from "../utils/getEmojis";
 
 const TodayCard = ({ data, weatherUnits }) => {
-  console.log(data);
-  console.log(weatherUnits);
   const [weatherEmojis, setWeatherEmojis] = useState("");
-  const [averageTemperature, setAverageTemperature] = useState(0);
 
   useEffect(() => {
     if (!data) return;
