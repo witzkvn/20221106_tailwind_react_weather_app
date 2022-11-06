@@ -24,17 +24,21 @@ const WeekDayCard = ({ data, weatherUnits }) => {
   }, [data]);
 
   if (!data || !weatherUnits) {
-    return <div>loading</div>;
+    return <div className="text-2xl text-center text-red-500">Erreur...</div>;
   }
 
   return (
-    <div>
-      <p>{data.day}</p>
-      <div>{weatherEmojis}</div>
-      <p>
-        {averageTemperature}
-        {weatherUnits.temperature}
+    <div className="text-center p-6 rounded-md bg-white/30 shadow-md flex justify-center items-center md:flex-col">
+      <p className="text-lg font-bold md:mb-1">{data.day}</p>
+      <p className="ml-6 md:mb-4 md:ml-0">
+        {averageTemperature}{" "}
+        <span className="text-xs font-semibold">
+          {weatherUnits.temperature}
+        </span>
       </p>
+      <div className="grid grid-flow-col gap-2 place-items-center ml-6 text-4xl md:ml-0">
+        {weatherEmojis && <div>{weatherEmojis}</div>}
+      </div>
     </div>
   );
 };

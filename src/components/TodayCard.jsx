@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { emojis } from "../utils/emojis";
-import { formatDateToHours } from "../utils/formatDateToHours";
+import { formatDateToHoursMinutes } from "../utils/formatDateToHoursMinutes";
 import { getEmojis } from "../utils/getEmojis";
 
 const TodayCard = ({ data, weatherUnits }) => {
@@ -24,15 +24,25 @@ const TodayCard = ({ data, weatherUnits }) => {
   }, [data]);
 
   if (!data || !weatherUnits) {
-    return <div>loading</div>;
+    return (
+      <div className="text-2xl text-center text-red-500">
+        Aucune données. Affichage impossible.
+      </div>
+    );
   }
 
   return (
-    <div>
-      <h1>Météo du jour</h1>
-      <div>
-        <div>{weatherEmojis}</div>
-        <div>
+    <div className="max-w-max xl:ml-auto mx-auto">
+      <div className="flex mb-20 mt-12 flex-col xl:flex-row ">
+        <div className="flex flex-col">
+          <div className="text-8xl mb-8 text-center xl:text-right ">
+            {weatherEmojis}
+          </div>
+          <div className="text-3xl font-bold text-center text-white mt-auto mb-8 xl:mt-auto xl:mb-0">
+            Aujourd'hui, {data.day}
+          </div>
+        </div>
+        <div className="text-xl ml-12 pl-4 xl:border-l-2 xl:border-l-indigo-500">
           <p>
             {emojis.calendar} Jour : {data.day}
           </p>
@@ -41,11 +51,11 @@ const TodayCard = ({ data, weatherUnits }) => {
           </p>
           <p>
             {emojis.sunrise} Levé du soleil :{" "}
-            {formatDateToHours(new Date(data.sunrise))}
+            {formatDateToHoursMinutes(new Date(data.sunrise))}
           </p>
           <p>
             {emojis.sunset} Couché du soleil :{" "}
-            {formatDateToHours(new Date(data.sunset))}
+            {formatDateToHoursMinutes(new Date(data.sunset))}
           </p>
           <p>
             {emojis.hot} Température Max : {data.temperature_2m_max}{" "}
