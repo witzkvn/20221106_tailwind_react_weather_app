@@ -50,11 +50,11 @@ const TodayCard = ({ data, weatherUnits }) => {
             {emojis.rain} Pluie : {data.precipitation_sum} {weatherUnits.rain}
           </p>
           <p>
-            {emojis.sunrise} Levé du soleil :{" "}
+            {emojis.sunrise} Lever du soleil :{" "}
             {formatDateToHoursMinutes(new Date(data.sunrise))}
           </p>
           <p>
-            {emojis.sunset} Couché du soleil :{" "}
+            {emojis.sunset} Coucher du soleil :{" "}
             {formatDateToHoursMinutes(new Date(data.sunset))}
           </p>
           <p>
